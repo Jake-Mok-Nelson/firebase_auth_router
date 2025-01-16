@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
         ),
         body: Center(
           child: ElevatedButton(
+            key: const Key('signOut'),
             onPressed: firebaseAuth.signOut,
             child: const Text('Sign out'),
           ),
