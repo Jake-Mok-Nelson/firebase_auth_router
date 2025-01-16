@@ -19,7 +19,7 @@ fi
 cd example
 if [ -d "full" ]; then
     cd full
-    flutter build web --release --base-href="/$REPO_NAME/"
+    flutter build web --release --base-href="/$REPO_NAME/" --wasm
     rm -rf ../../docs
     cp -r build/web ../../docs
 fi
