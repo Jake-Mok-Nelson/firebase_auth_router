@@ -1,11 +1,5 @@
 # Firebase Auth Router
 
-[![Release Test](https://github.com/Jake-Mok-Nelson/firebase_auth_router/actions/workflows/release-test.yml/badge.svg?branch=main)](https://github.com/Jake-Mok-Nelson/firebase_auth_router/actions/workflows/release-test.yml)
-
-![Pub Points](https://img.shields.io/pub/points/firebase_auth_router)
-
-
-
 A Flutter widget that handles routing based on Firebase Authentication state. This package automatically navigates between pages based on the user's authentication status.
 
 Demo: [https://jake-mok-nelson.github.io/firebase_auth_router/](https://jake-mok-nelson.github.io/firebase_auth_router/)
