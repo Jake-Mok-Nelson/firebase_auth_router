@@ -27,49 +27,69 @@ class FirebaseAuthRouter extends StatelessWidget {
   /// The [home] widget is displayed when a user is authenticated.
   /// The [loginPage] widget is displayed when no user is authenticated.
   /// The [loadingWidget] is displayed while the authentication state is being determined.
+  /// The [errorBuilder] is called when an error occurs during authentication.
   const FirebaseAuthRouter({
     required final FirebaseAuth firebaseAuth,
     required this.home,
     required this.loginPage,
-    required this.loadingWidget,
     super.key,
+    this.loadingWidget = const Center(child: CircularProgressIndicator()),
     this.onLogin,
+    this.onError,
+    this.errorBuilder,
   }) : _firebaseAuth = firebaseAuth;
+
   final FirebaseAuth _firebaseAuth;
-
-  /// The widget to display when the user is logged in.
   final Widget home;
-
-  /// The widget to display when the user is logged out.
   final Widget loginPage;
-
-  /// The widget to display while the auth state is loading.
-  ///
-  /// This widget is shown during the initial load and while checking
-  /// authentication state changes.
   final Widget loadingWidget;
-
-  /// Callback triggered after successful authentication.
-  ///
-  /// This callback provides the authenticated [User] object and is called
-  /// before displaying the [home] widget. It can be used for post-login
-  /// operations such as analytics tracking or user data initialization.
   final Function(User)? onLogin;
+
+  /// Callback triggered when an error occurs during authentication.
+  final Function(Object error)? onError;
+
+  /// Builder function to create a custom error widget.
+  ///
+  /// If not provided, a default error widget will be shown with a retry button.
+  final Widget Function(BuildContext context, Object error)? errorBuilder;
 
   @override
   Widget build(final BuildContext context) => StreamBuilder<User?>(
         stream: _firebaseAuth.authStateChanges(),
         builder:
             (final BuildContext context, final AsyncSnapshot<User?> snapshot) {
+          if (snapshot.hasError) {
+            if (onError != null) {
+              onError!(snapshot.error!);
+            }
+            return errorBuilder?.call(context, snapshot.error!) ??
+                Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Authentication Error'),
+                      ElevatedButton(
+                        onPressed: () {
+                          _firebaseAuth.signOut();
+                        },
+                        child: const Text('Retry'),
+                      ),
+                    ],
+                  ),
+                );
+          }
+
           if (snapshot.connectionState == ConnectionState.waiting) {
             return loadingWidget;
           }
+
           if (snapshot.hasData && snapshot.data != null) {
             if (onLogin != null) {
               onLogin!(snapshot.data!);
             }
             return home;
           }
+
           return loginPage;
         },
       );
@@ -77,8 +97,15 @@ class FirebaseAuthRouter extends StatelessWidget {
   @override
   void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-
+    properties.add(ObjectFlagProperty<Function(User)?>.has('onLogin', onLogin));
     properties
-        .add(ObjectFlagProperty<Function(User p1)?>.has('onLogin', onLogin));
+        .add(ObjectFlagProperty<Function(Object)?>.has('onError', onError));
+    properties.add(
+      ObjectFlagProperty<
+          Widget Function(BuildContext context, Object error)?>.has(
+        'errorBuilder',
+        errorBuilder,
+      ),
+    );
   }
 }
