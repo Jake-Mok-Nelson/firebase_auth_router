@@ -1,6 +1,6 @@
 name: firebase_auth_router
-description: 'Handle routing between auth/unauth pages for Firebase applications.'
-version: 0.0.1
+description: 'Navigate between unauthenticated and an authenticated screen easily with Firebase Auth.'
+version: 0.1.0
 homepage:
 
 environment:
