@@ -6,5 +6,5 @@
     - Customizable loading widget during authentication state changes
     - Simple integration with Firebase Auth
 
-# 1.0.1
+## 1.0.1
 - Update the pubspec to ensure there is no upper bounds on Flutter
