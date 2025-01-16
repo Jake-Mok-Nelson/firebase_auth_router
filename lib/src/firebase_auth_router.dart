@@ -22,12 +22,8 @@ import 'package:flutter/material.dart';
 /// ```
 class FirebaseAuthRouter extends StatelessWidget {
   /// Creates a Firebase authentication router.
-  ///
-  /// The [firebaseAuth] instance is required to listen to authentication states.
-  /// The [home] widget is displayed when a user is authenticated.
-  /// The [loginPage] widget is displayed when no user is authenticated.
-  /// The [loadingWidget] is displayed while the authentication state is being determined.
-  /// The [errorBuilder] is called when an error occurs during authentication.
+  /// Firebase authentication state changes are listened to and the appropriate
+  /// page is displayed based on the user's authentication status.
   const FirebaseAuthRouter({
     required final FirebaseAuth firebaseAuth,
     required this.home,
@@ -39,17 +35,29 @@ class FirebaseAuthRouter extends StatelessWidget {
     this.errorBuilder,
   }) : _firebaseAuth = firebaseAuth;
 
+  /// The Firebase authentication instance.
   final FirebaseAuth _firebaseAuth;
+
+  /// The widget to display when a user is authenticated.
   final Widget home;
+
+  /// The widget to display when no user is authenticated.
   final Widget loginPage;
+
+  /// The widget to display while waiting for the initial Firebase to establish.
   final Widget loadingWidget;
+
+  /// Callback triggered when a user is authenticated.
+  /// The user object is passed as an argument to the callback.
+  /// Useful for things like: analytics, logging, data initialisation, etc.
   final Function(User)? onLogin;
 
   /// Callback triggered when an error occurs during authentication.
+  /// The error object is passed as an argument to the callback.
+  /// This is not the same as a user failing to authenticate.
   final Function(Object error)? onError;
 
   /// Builder function to create a custom error widget.
-  ///
   /// If not provided, a default error widget will be shown with a retry button.
   final Widget Function(BuildContext context, Object error)? errorBuilder;
 
