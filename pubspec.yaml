@@ -23,3 +23,6 @@ dev_dependencies:
   mockito: ^5.4.4
 
 flutter:
+
+false_secrets:
+  - example/lib/firebase_options.dart

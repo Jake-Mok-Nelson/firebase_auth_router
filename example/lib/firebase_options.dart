@@ -52,6 +52,10 @@ class DefaultFirebaseOptions {
     }
   }
 
+  // Note that this triggers all kinds of key leak warnings in Dart
+  // and Github. API Key in a front-end application (especially Firebase)
+  // is not a security risk.
+  // https://firebase.google.com/docs/projects/api-keys#api-keys-for-firebase-are-different
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyCOCAnYEljtLuaq-2-hHt57dv8SAe0TCc8',
     appId: '1:115013526183:web:f22856a0a964a4b972f182',
