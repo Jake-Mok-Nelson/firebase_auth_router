@@ -1,4 +1,7 @@
-## 0.1.0
+## 1.0.0
 
-- Initial build of the Firebase Auth Rotuer.
-
+- Initial release of the Firebase Auth Rotuer.
+- Features:
+    - Automatic routing between authenticated and unauthenticated states
+    - Customizable loading widget during authentication state changes
+    - Simple integration with Firebase Auth
