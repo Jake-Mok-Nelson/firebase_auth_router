@@ -33,8 +33,9 @@ bump:
 	fi
 bump-version: bump
 
+# Erases the Dart documentation and generates it again
 docs:
-	if [ -d "docs" ]; then rm -rf docs; fi
+	if [ -d "doc" ]; then rm -rf doc; fi
 	dart doc
 
 # Publishes the package to pub.dev
