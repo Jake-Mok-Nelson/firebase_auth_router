@@ -2,11 +2,31 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-/// A widget that listens to user auth changes.
-/// When the stream emits a valid user, it displays `home`.
-/// When there is no user, it displays `loginPage`.
+/// A router widget that handles Firebase Authentication state changes.
+///
+/// This widget listens to authentication state changes and automatically routes
+/// between a login page and home page based on the user's authentication status.
+///
+/// Example usage:
+/// ```dart
+/// FirebaseAuthRouter(
+///   firebaseAuth: FirebaseAuth.instance,
+///   home: const HomePage(),
+///   loginPage: const LoginPage(),
+///   loadingWidget: const CircularProgressIndicator(),
+///   onLogin: (user) {
+///     // Perform post-login operations
+///     analytics.logLogin();
+///   },
+/// )
+/// ```
 class FirebaseAuthRouter extends StatelessWidget {
-  /// Route between pages based on the user's authentication state.
+  /// Creates a Firebase authentication router.
+  ///
+  /// The [firebaseAuth] instance is required to listen to authentication states.
+  /// The [home] widget is displayed when a user is authenticated.
+  /// The [loginPage] widget is displayed when no user is authenticated.
+  /// The [loadingWidget] is displayed while the authentication state is being determined.
   const FirebaseAuthRouter({
     required final FirebaseAuth firebaseAuth,
     required this.home,
@@ -24,13 +44,16 @@ class FirebaseAuthRouter extends StatelessWidget {
   final Widget loginPage;
 
   /// The widget to display while the auth state is loading.
+  ///
+  /// This widget is shown during the initial load and while checking
+  /// authentication state changes.
   final Widget loadingWidget;
 
-  /// A callback to run when the user has logged in but before the `home` widget
-  /// is displayed.
-  /// This is useful for analytics, any app initialization, etc.
-  /// You can decide if you want to wait for the callback to complete
-  /// before showing the `home` widget.
+  /// Callback triggered after successful authentication.
+  ///
+  /// This callback provides the authenticated [User] object and is called
+  /// before displaying the [home] widget. It can be used for post-login
+  /// operations such as analytics tracking or user data initialization.
   final Function(User)? onLogin;
 
   @override
