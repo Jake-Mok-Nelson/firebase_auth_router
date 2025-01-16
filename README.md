@@ -22,7 +22,7 @@ Add this dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  firebase_auth_router: ^1.0.1
+  firebase_auth_router: ^1.0.2
 ```
 
 ## Usage
