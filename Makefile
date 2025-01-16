@@ -16,12 +16,8 @@ test:
 # Runs an example app in the example directory
 ## Example: make test-example-run full
 ## or make test-example-run (and choose, 1. full, 2. other, etc.)
-test-example-run:
-	@if [ "$(word 2,$(MAKECMDGOALS))" != "" ]; then \
-		./scripts/run_example.sh $(word 2,$(MAKECMDGOALS)); \
-	else \
-		./scripts/run_example.sh; \
-	fi
+test-example:
+	cd example && flutter run -d chrome --debug
 
 # Runs bash script files in ./scripts/ that end in _test.sh
 test-scripts:
