@@ -2,6 +2,8 @@
 
 A Flutter widget that handles routing based on Firebase Authentication state. This package automatically navigates between pages based on the user's authentication status.
 
+Demo: [https://jake-mok-nelson.github.io/firebase_auth_router/](https://jake-mok-nelson.github.io/firebase_auth_router/)
+
 ## Features
 
 - Automatic routing between authenticated and unauthenticated states
