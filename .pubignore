@@ -166,8 +166,8 @@ app.*.symbols
 docs/
 scripts/
 # include simple example only to reduce size
-example/full/
-example/firebase_router/
+example/
+!example/example.dart
 
 test_pubspec.yaml
 test_README.md
