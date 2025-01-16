@@ -11,3 +11,6 @@
 # 1.0.2
 - Improve documentation of properties and methods
 - Correct the example
+
+# 1.0.3
+- Minor updates to documentation
