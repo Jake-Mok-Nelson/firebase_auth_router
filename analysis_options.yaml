@@ -1,0 +1,53 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    # Error prevention
+    - avoid_print
+    - avoid_empty_else
+    - avoid_type_to_string
+    - avoid_unused_constructor_parameters
+    - cancel_subscriptions
+    - close_sinks
+    
+    # Flutter specific
+    - use_build_context_synchronously
+    - use_key_in_widget_constructors
+    - sized_box_for_whitespace
+    - prefer_const_literals_to_create_immutables
+    - avoid_unnecessary_containers
+    - use_decorated_box
+    - use_colored_box
+    - use_full_hex_values_for_flutter_colors
+    - avoid_classes_with_only_static_members
+    - depend_on_referenced_packages
+    - diagnostic_describe_all_properties
+    - prefer_relative_imports
+    - sort_child_properties_last
+    
+    # Code style & readability
+    - prefer_const_constructors
+    - prefer_const_declarations
+    - prefer_final_locals
+    - prefer_single_quotes
+    - require_trailing_commas
+    - always_declare_return_types
+    
+    # Null safety
+    - avoid_init_to_null
+    - null_check_on_nullable_type_parameter
+    - prefer_null_aware_operators
+    - avoid_returning_null_for_void
+    - prefer_if_null_operators
+    - unnecessary_null_aware_assignments
+    - unnecessary_null_checks
+
+    
+    # Performance
+    - prefer_contains
+    - avoid_slow_async_io
+    - avoid_function_literals_in_foreach_calls
+    - prefer_final_in_for_each
+    - prefer_foreach
+    - avoid_double_and_int_checks
+    - constant_identifier_names
