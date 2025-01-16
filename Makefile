@@ -1,6 +1,6 @@
 # Makefile for Flutter commands and to release the package
 
-.PHONY: clean init test test-scripts bump-version bump release generate-demo test-example-run generate-example generate
+.PHONY: clean init test test-scripts bump-version bump docs release generate-demo test-example-run generate-example generate
 
 clean:
 	flutter clean
@@ -33,8 +33,12 @@ bump:
 	fi
 bump-version: bump
 
+docs:
+	if [ -d "docs" ]; then rm -rf docs; fi
+	dart doc
+
 # Publishes the package to pub.dev
-release:
+release: docs
 	./scripts/release.sh ./ --strict
 
 # Generates the example app

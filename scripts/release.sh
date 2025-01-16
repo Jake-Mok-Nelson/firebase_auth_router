@@ -74,8 +74,23 @@ fi
 
 # Check changelog for matching version
 CHANGELOG_FILE="$TARGET_DIR/CHANGELOG.md"
-if ! grep -q "## $VERSION" "$CHANGELOG_FILE"; then
+if ! grep -q "$VERSION" "$CHANGELOG_FILE"; then
     error_exit "No matching version $VERSION in CHANGELOG.md"
+fi
+
+# Check if there are uncommitted changes
+if ! git diff-index --quiet HEAD --; then
+    error_exit "Uncommitted changes in the repository"
+fi
+
+# Check if there are unformatted files
+if ! dart format . --set-exit-if-changed -o none; then
+    error_exit "There are unformatted files in the repository, run 'dart format .'"
+fi
+
+# Analyze the code
+if ! dart analyze --fatal-infos; then
+    error_exit "There are analysis issues in the code, run 'dart analyze --fatal-infos'"
 fi
 
 # Tag the repository and publish

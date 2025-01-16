@@ -2,5 +2,3 @@
 library;
 
 export 'src/firebase_auth_router.dart';
-
-
